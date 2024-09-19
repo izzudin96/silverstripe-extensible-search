@@ -5,9 +5,9 @@ namespace nglasl\extensible;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Security\Security;
 use SilverStripe\View\Requirements;
 
 /**
@@ -200,7 +200,7 @@ class ExtensibleSearchSuggestion extends DataObject implements PermissionProvide
 
 		// Restrict this field appropriately.
 
-		$user = Member::currentUserID();
+		$user = Security::getCurrentUser();
 		if(!Permission::checkMember($user, 'EXTENSIBLE_SEARCH_SUGGESTIONS')) {
 			$approved->setAttribute('disabled', 'true');
 		}

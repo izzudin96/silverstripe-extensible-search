@@ -24,8 +24,8 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\Queries\SQLSelect;
 use SilverStripe\ORM\Search\FulltextSearchable;
-use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
+use SilverStripe\Security\Security;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
@@ -350,7 +350,7 @@ class ExtensibleSearchPage extends \Page {
 
 			// Appropriately restrict the approval functionality.
 
-			$user = Member::currentUserID();
+			$user = Security::getCurrentUser();
 			if(Permission::checkMember($user, 'EXTENSIBLE_SEARCH_SUGGESTIONS')) {
 				Requirements::javascript('nglasl/silverstripe-extensible-search: client/javascript/extensible-search-approval.js');
 			}
